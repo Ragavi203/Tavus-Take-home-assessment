@@ -1,67 +1,73 @@
-# Tavus CVI Customer Advocate Demo
+# Styling Concierge – Tavus CVI Demo (Report)
 
-A lightweight, dependency-free demo that shows how to kick off and manage a Tavus **Conversational Video Interface (CVI)** session. It uses a tiny Node proxy (no external npm packages) to keep your `x-api-key` out of the browser and a static HTML UI for quick experimentation.
+This demo shows a high-touch styling experience powered by Tavus Conversational Video Interface (CVI). It includes a luxury-inspired, two-persona UI and a minimal Node proxy that keeps the Tavus API key server-side.
 
-## What this demo does
-- Starts a conversation with a provided `replica_id` and `persona_id` via `POST /v2/conversations`.
-- Surfaces the returned `conversation_url` so you can open or embed the call immediately.
-- Lets you fetch status (`GET /v2/conversations/{id}`) and end a call (`POST /v2/conversations/{id}/end`).
-- Keeps everything configurable through environment variables instead of hard-coding secrets.
+## Why this project
+- Demonstrates real-time, human-in-the-loop styling with Tavus CVI.
+- Protects secrets with a tiny proxy (no external deps).
+- Highlights two distinct personas:
+  - **Style Concierge**: Makeup + look pairing, boldness tuning, recap.
+  - **Closet Refresh Curator**: Reuse-first outfits, minimal add-ons, recap + care tips.
+- Persona setup + objectives/guardrails are auto-attached via env, proving safe, policy-driven sessions.
 
-## Quick start
-1. **Prereqs:** Node 18+ (for built-in `fetch`), a Tavus API key, and replica/persona IDs (stock IDs work too).
-2. **Configure env:**
-   ```sh
-   cp env.example .env
-   # then set TAVUS_API_KEY, optionally TAVUS_BASE_URL and PORT
-   ```
-3. **Run locally:**
-   ```sh
-   node server.js
-   ```
-4. Open `http://localhost:4173` and start a conversation. Paste your `conversation_url` in a new tab to join, or use the embed preview.
+## Architecture (high level)
+- **Frontend (`index.html`)**: Static, luxury-styled UI; users pick a stylist and start a session; calls the proxy, never exposes the API key.
+- **Proxy (`server.js`)**: Minimal Node HTTP server (no deps) that injects `x-api-key` and forwards to Tavus (`https://tavusapi.com/v2`). Binds to `0.0.0.0` for hosting. Auto-attaches objectives/guardrails from env (default + alt personas).
+- **Tavus CVI**: Creates conversations and returns `conversation_url` for the live session.
 
-## Architecture
-- **Browser UI (`index.html`)** — Vanilla JS form to collect persona/replica IDs and optional callback URL, then calls a local proxy.
-- **Proxy (`server.js`)** — Small Node HTTP server that forwards requests to Tavus (`https://tavusapi.com/v2` by default) with the `x-api-key` header injected. No external packages.
-- **Tavus CVI** — Handles the real-time video call; response includes `conversation_id` and `conversation_url`.
-- **Optional auto-attach** — If you set `TAVUS_OBJECTIVES_ID` and `TAVUS_GUARDRAILS_ID` in `.env`, the proxy will attach them when creating conversations.
-
+Data flow:
 ```
-Browser ──► Local proxy (/api/conversations, /api/conversations/:id, /end)
-        ◄── Tavus API (conversations endpoints)
+UI (stylist selection) → proxy (/api/conversations) → Tavus CVI → returns conversation_id + conversation_url
 ```
 
-## Key endpoints used
-- `POST /v2/conversations` — start a call with `replica_id` and `persona_id`.
-- `GET /v2/conversations/{conversation_id}` — check status and retrieve join URL.
-- `POST /v2/conversations/{conversation_id}/end` — terminate an active call.
+## Key decisions
+- **No frontend secrets**: API key stays server-side; proxy handles all Tavus calls.
+- **Persona flexibility**: Default + alt personas/replicas/objectives/guardrails are configurable via env; UI switches IDs per stylist.
+- **Zero external deps**: Plain Node `http` + `fetch`; fast start, minimal attack surface.
+- **Luxury UX**: Serif headings (Playfair/Cormorant), Inter body, muted palette, rounded cards, minimal chrome.
 
-Reference: Tavus API docs ([Create Conversation](https://tavusapi.com/v2/conversations), [API overview](https://docs.tavus.io/api-reference/overview)).
+## Setup (local)
+1) Prereqs: Node 18+.  
+2) Copy env: `cp env.example .env` and set:
+```
+TAVUS_API_KEY=...
+TAVUS_BASE_URL=https://tavusapi.com/v2
+PORT=4173
+TAVUS_DEFAULT_PERSONA_ID=...
+TAVUS_DEFAULT_REPLICA_ID=...
+TAVUS_OBJECTIVES_ID=...
+TAVUS_GUARDRAILS_ID=...
+TAVUS_ALT_PERSONA_ID=pc6420314586
+TAVUS_ALT_REPLICA_ID=rc2146c13e81
+TAVUS_ALT_OBJECTIVES_ID=o832aa68c913c
+TAVUS_ALT_GUARDRAILS_ID=...
+```
+3) Run: `node server.js` and open `http://localhost:4173`.
+4) Pick a stylist card → Start; the proxy attaches the correct persona/replica/objectives/guardrails.
 
-## Testing quickly
-Use curl against the local proxy (requires `TAVUS_API_KEY` set):
+## Deploy (Railway/Render)
+- Add `package.json` (start: `node server.js`, engines: Node 18).
+- Start command: `node server.js`; Build: none.  
+- Set env vars (as above).  
+- Ensure bind to `0.0.0.0` (already in `server.js`).  
+- Use the service URL to access the app; frontend calls the same origin proxy.
+
+## Files of interest
+- `index.html`: UI, stylist selection, single start surface (only in stylist cards).  
+- `server.js`: Proxy, env loader, auto-attach objectives/guardrails, binds `0.0.0.0`.  
+- `package.json`: Start script + Node 18 engine.  
+- `env.example`: Env placeholders.
+
+## Testing snippet
 ```sh
 curl -X POST http://localhost:4173/api/conversations \
   -H "content-type: application/json" \
-  -d '{"replica_id":"<replica_id>","persona_id":"<persona_id>","conversation_name":"Demo"}'
+  -d '{"replica_id":"<replica>","persona_id":"<persona>","conversation_name":"Demo"}'
 ```
 
-## (Optional) create style concierge objectives/guardrails
-Hit this once (after setting `TAVUS_API_KEY`), then export the returned IDs:
-```sh
-curl -X POST http://localhost:4173/api/bootstrap-style
-```
-Set in `.env`:
-```
-TAVUS_OBJECTIVES_ID=<id>
-TAVUS_GUARDRAILS_ID=<id>
-```
-Restart `node server.js`, and the proxy will attach them automatically.
-
-## Extending (next steps if you had more time)
-- Upload documents and attach a Knowledge Base to the persona for RAG-style answers.
-- Add guardrails/objectives for branching flows (e.g., sales triage, interview rubric).
-- Persist conversation transcripts and surface session analytics.
-- Swap the vanilla UI with your preferred framework and add auth for multi-user usage.
+## What’s left if there was more time
+- Add “How it works” strip + richer editorial imagery.
+- Post-session recap card with share/export.
+- Optional KB upload + guardrails editor UI.
+- GitHub Actions for deploy to Railway/Render.
 
