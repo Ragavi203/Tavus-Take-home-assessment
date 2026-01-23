@@ -65,9 +65,4 @@ curl -X POST http://localhost:4173/api/conversations \
   -d '{"replica_id":"<replica>","persona_id":"<persona>","conversation_name":"Demo"}'
 ```
 
-## What’s left if there was more time
-- Add “How it works” strip + richer editorial imagery.
-- Post-session recap card with share/export.
-- Optional KB upload + guardrails editor UI.
-- GitHub Actions for deploy to Railway/Render.
 
