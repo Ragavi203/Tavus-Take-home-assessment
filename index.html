@@ -266,6 +266,10 @@
         border-color: var(--charcoal);
       }
 
+      .stylist-cards .card.sustain {
+        border-color: var(--warm-taupe);
+      }
+
       .stylist-cards .card ul {
         list-style: none;
         padding: 0;
@@ -440,6 +444,234 @@
         padding: 20px 48px;
       }
 
+      /* Timeline */
+      .timeline-section {
+        background: var(--warm-off-white);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 20px;
+      }
+
+      @media (min-width: 900px) {
+        .timeline {
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+      }
+
+      .timeline-step {
+        position: relative;
+        padding: 20px;
+        background: var(--pure-white);
+        border: 1px solid var(--soft-gray);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-light);
+        min-height: 180px;
+        overflow: hidden;
+      }
+
+      .timeline-step::after {
+        content: '';
+        position: absolute;
+        top: 44px;
+        right: -12px;
+        height: 2px;
+        width: 24px;
+        background: linear-gradient(90deg, var(--burgundy), rgba(139, 21, 56, 0.08));
+        opacity: 0.5;
+      }
+
+      .timeline-step:last-child::after {
+        display: none;
+      }
+
+      @media (max-width: 899px) {
+        .timeline-step {
+          min-height: auto;
+        }
+        .timeline-step::after {
+          display: none;
+        }
+        .timeline-step:not(:last-child) {
+          border-left: 3px solid var(--soft-burgundy);
+        }
+      }
+
+      .timeline-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(139, 21, 56, 0.08);
+        display: grid;
+        place-items: center;
+        margin-bottom: 12px;
+      }
+
+      .timeline-icon svg {
+        width: 22px;
+        height: 22px;
+        fill: var(--burgundy);
+      }
+
+      .timeline-step h4 {
+        margin-bottom: 8px;
+      }
+
+      .timeline-step p {
+        color: var(--secondary-text);
+        margin: 0;
+      }
+
+      /* FAQ */
+      .faq {
+        background: var(--pure-white);
+      }
+
+      .accordion {
+        max-width: 900px;
+        margin: 0 auto;
+        border-top: 1px solid var(--soft-gray);
+      }
+
+      .accordion-item {
+        border-bottom: 1px solid var(--soft-gray);
+      }
+
+      .accordion button {
+        width: 100%;
+        text-align: left;
+        padding: 20px 0;
+        background: none;
+        border: none;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--primary-text);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .accordion button span {
+        flex: 1;
+        margin-right: 12px;
+      }
+
+      .accordion button .chevron {
+        transition: transform 0.2s ease;
+        display: inline-block;
+        color: var(--burgundy);
+        font-weight: 700;
+      }
+
+      .accordion button[aria-expanded="true"] .chevron {
+        transform: rotate(90deg);
+      }
+
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.25s ease;
+        color: var(--secondary-text);
+        padding-right: 8px;
+      }
+
+      .accordion-content p {
+        padding: 0 0 16px 0;
+        margin: 0;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--warm-off-white);
+        padding: 64px 0 32px;
+        border-top: 1px solid var(--soft-gray);
+      }
+
+      .footer-grid {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .footer h4 {
+        margin-bottom: 12px;
+      }
+
+      .footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer li {
+        margin-bottom: 8px;
+      }
+
+      .footer a {
+        color: var(--secondary-text);
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        color: var(--burgundy);
+      }
+
+      .socials {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 8px;
+      }
+
+      .socials a {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(139, 21, 56, 0.08);
+        display: grid;
+        place-items: center;
+      }
+
+      .socials svg {
+        width: 18px;
+        height: 18px;
+        fill: var(--burgundy);
+      }
+
+      .signup {
+        margin-top: 12px;
+      }
+
+      .signup input {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: var(--radius);
+        border: 1px solid var(--soft-gray);
+        margin-bottom: 10px;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .footer-note {
+        margin-top: 32px;
+        text-align: center;
+        color: var(--tertiary-text);
+        font-size: 14px;
+      }
+
+      /* Reveal animations */
+      .fade-item {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .fade-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
       @media (max-width: 767px) {
         h1 { font-size: 38px; }
         h2 { font-size: 28px; }
@@ -562,7 +794,7 @@
     <section class="stylist-section section">
       <div class="container">
         <h2>Choose your stylist</h2>
-        <div class="stylist-cards grid grid-2">
+        <div class="stylist-cards grid grid-3">
           <div class="card concierge">
             <h3>Style Concierge</h3>
             <p>Makeup + look pairing; adjusts in real time.</p>
@@ -583,32 +815,124 @@
             </ul>
             <button class="btn btn-secondary" id="start-closet-card">Start with Closet Refresh</button>
           </div>
+          <div class="card sustain">
+            <h3>The Sustainable Selector</h3>
+            <p>Eco-forward looks: thrifted finds, rental swaps, and low-impact fabrics.</p>
+            <ul>
+              <li>Build outfits from what you own + curated thrift inspo</li>
+              <li>Suggest rentals for statement pieces over single-use buys</li>
+              <li>Prioritize fabrics with lower footprint and longer wear</li>
+            </ul>
+            <button class="btn btn-secondary" id="start-sustain-card" aria-label="Start with The Sustainable Selector">Start with Sustainable Selector</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Session Interface Preview -->
-    <section class="session-preview">
+    <!-- How It Works Timeline -->
+    <section class="timeline-section section">
       <div class="container">
-        <h2>Live session experience</h2>
-        <div class="session-mockup" style="min-height: 320px;">
-          <div class="status">
-            <span class="status-pill">No session</span>
-            <span>Demo conversation</span>
+        <h2>How it works</h2>
+        <p style="color: var(--secondary-text); max-width: 720px; margin-bottom: 32px;">Five quick steps from hello to your curated recap - kept concise so you can glide into the look you want.</p>
+        <div class="timeline">
+          <div class="timeline-step fade-item">
+            <div class="timeline-icon">
+              <svg viewBox="0 0 24 24"><path d="M6 4h12a2 2 0 0 1 2 2v2H4V6a2 2 0 0 1 2-2zm-2 6h16v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8zm4 2v2h2v-2H8zm6 0v2h2v-2h-2z"/></svg>
+            </div>
+            <h4>Pick your stylist</h4>
+            <p>Choose Style Concierge for beauty + looks, or Closet Refresh to remix your wardrobe.</p>
           </div>
-          <div style="margin-bottom: 16px;">
-            <span style="color: var(--tertiary-text); font-size: 14px;">ID: <span id="conversation-id">—</span></span>
+          <div class="timeline-step fade-item">
+            <div class="timeline-icon">
+              <svg viewBox="0 0 24 24"><path d="M5 4h14a1 1 0 0 1 1 1v10.5a.5.5 0 0 1-.8.4L14 12.8V18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/></svg>
+            </div>
+            <h4>Share your vibe</h4>
+            <p>Note the event, vibe, or constraints - so the session starts tailored to you.</p>
           </div>
-          <div>
-            <a href="#" class="conversation-link" style="display: none;">Open conversation</a>
+          <div class="timeline-step fade-item">
+            <div class="timeline-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3zm0 2.15L5 8.1v7.8L12 18.85l7-2.95V8.1L12 5.15zM9.5 9h1.75v6H9.5V9zm3.25 0H14.5v6h-1.75V9z"/></svg>
+            </div>
+            <h4>Meet live</h4>
+            <p>Instant video session — camera, mic, and handoff - ready whenever you want human help.</p>
           </div>
-          <div class="session-notes">
-            <details>
-              <summary>Session notes</summary>
-              <div id="session-logs" style="margin-top: 8px; color: var(--secondary-text); font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.5;">
-                Ready.
-              </div>
-            </details>
+          <div class="timeline-step fade-item">
+            <div class="timeline-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11zM6.5 6a.5.5 0 0 0-.5.5V9h12V6.5a.5.5 0 0 0-.5-.5h-11zM18 11.5H6v6a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-6z"/></svg>
+            </div>
+            <h4>Co-create looks</h4>
+            <p>Try ideas in real time - shade tweaks, accessory swaps, or closet reuse prompts.</p>
+          </div>
+          <div class="timeline-step fade-item">
+            <div class="timeline-icon">
+              <svg viewBox="0 0 24 24"><path d="M6 4h12v2H6V4zm0 4h12v2H6V8zm0 4h7v2H6v-2zm0 4h5v2H6v-2z"/></svg>
+            </div>
+            <h4>Recap & next steps</h4>
+            <p>Get a tidy recap with buys and rewears; optional email follow-up for easy reference.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="faq section">
+      <div class="container">
+        <h2>FAQ</h2>
+        <p style="color: var(--secondary-text); margin-bottom: 24px;">Quick answers to the questions clients ask most before they book.</p>
+        <div class="accordion" role="region" aria-label="Styling FAQ">
+          <div class="accordion-item">
+            <button aria-expanded="false" aria-controls="faq1" id="faq1-trigger">
+              <span>How fast can I start a session?</span>
+              <span class="chevron">›</span>
+            </button>
+            <div id="faq1" role="region" aria-labelledby="faq1-trigger" class="accordion-content">
+              <p>Immediately. Pick a stylist and hit Start — the live session opens in a new tab so you stay focused.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button aria-expanded="false" aria-controls="faq2" id="faq2-trigger">
+              <span>What should I share with the stylist?</span>
+              <span class="chevron">›</span>
+            </button>
+            <div id="faq2" role="region" aria-labelledby="faq2-trigger" class="accordion-content">
+              <p>Event, vibe, preferred colors, and any must-use items from your closet. The more context, the sharper the recs.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button aria-expanded="false" aria-controls="faq3" id="faq3-trigger">
+              <span>Can you reuse my existing wardrobe?</span>
+              <span class="chevron">›</span>
+            </button>
+            <div id="faq3" role="region" aria-labelledby="faq3-trigger" class="accordion-content">
+              <p>Yes - Closet Refresh prioritizes rewears first, then minimal buys that unlock multiple outfits.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button aria-expanded="false" aria-controls="faq4" id="faq4-trigger">
+              <span>Do you account for undertones and skin nuances?</span>
+              <span class="chevron">›</span>
+            </button>
+            <div id="faq4" role="region" aria-labelledby="faq4-trigger" class="accordion-content">
+              <p>Style Concierge is trained on undertone-aware base, shade candidates, and finish preferences to keep matches flattering.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button aria-expanded="false" aria-controls="faq5" id="faq5-trigger">
+              <span>Will I get a recap after the call?</span>
+              <span class="chevron">›</span>
+            </button>
+            <div id="faq5" role="region" aria-labelledby="faq5-trigger" class="accordion-content">
+              <p>Yes - a concise summary with looks, buys, and rewears. You can also request a human stylist handoff.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button aria-expanded="false" aria-controls="faq6" id="faq6-trigger">
+              <span>Is my session private?</span>
+              <span class="chevron">›</span>
+            </button>
+            <div id="faq6" role="region" aria-labelledby="faq6-trigger" class="accordion-content">
+              <p>Sessions run through our secured proxy. No API keys are exposed on the frontend, and you can end the call anytime.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -633,6 +957,52 @@
       </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h4>About</h4>
+            <p style="color: var(--secondary-text); margin: 0;">Luxury-inspired styling with live CVI sessions, safety guardrails, and human handoff when you want it.</p>
+          </div>
+          <div>
+            <h4>Services</h4>
+            <ul>
+              <li><a href="#">Style Concierge</a></li>
+              <li><a href="#">Closet Refresh Curator</a></li>
+              <li><a href="#">Recap & follow-up</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="mailto:concierge@styling.app">concierge@styling.app</a></li>
+              <li><a href="#">Book a human stylist</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Follow Us</h4>
+            <div class="socials" aria-label="Social links">
+              <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v10c0 1.1.9 2 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H7zm5 3.2A3.8 3.8 0 1 1 8.2 10 3.8 3.8 0 0 1 12 8.2zm0 2A1.8 1.8 0 1 0 13.8 12 1.8 1.8 0 0 0 12 10.2zm4.2-3.4a.9.9 0 1 1-.9.9.9.9 0 0 1 .9-.9z"/></svg>
+              </a>
+              <a href="#" aria-label="Pinterest">
+                <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-3 17.48c-.04-.75-.07-1.9.02-2.72l.78-4.9s-.2-.4-.2-.98c0-.92.54-1.6 1.21-1.6.57 0 .85.43.85.94 0 .57-.36 1.43-.55 2.22-.16.69.33 1.25 1 1.25 1.2 0 2.12-1.26 2.12-3.08 0-1.61-1.16-2.74-2.82-2.74-1.92 0-3.05 1.44-3.05 2.93 0 .58.22 1.21.5 1.55a.2.2 0 0 1 .05.19l-.2.82c-.03.13-.1.16-.23.1-.87-.4-1.4-1.67-1.4-2.68 0-2.19 1.59-4.2 4.59-4.2 2.41 0 4.28 1.72 4.28 4.02 0 2.39-1.5 4.32-3.59 4.32-.7 0-1.35-.36-1.57-.78l-.43 1.64c-.16.62-.6 1.39-.89 1.86A9 9 0 1 0 12 3z"/></svg>
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M6.5 9H3.6v11h2.9V9zM5 4a1.7 1.7 0 1 0 0 3.4A1.7 1.7 0 0 0 5 4zm4.1 16h2.9v-6c0-1.6.9-2.6 2.3-2.6 1.3 0 2.1.9 2.1 2.6V20h2.9v-6.7c0-3-1.6-4.5-3.8-4.5-1.8 0-2.6 1-3 1.7h-.1V9H9.1v11z"/></svg>
+              </a>
+            </div>
+            <div class="signup" aria-label="Email signup">
+              <input type="email" name="email" placeholder="Email for updates" aria-label="Email for updates" />
+              <button class="btn btn-primary" style="width: 100%; justify-content: center;">Join</button>
+            </div>
+          </div>
+        </div>
+        <div class="footer-note">© 2026 Styling Concierge By Ragavi. All rights reserved.</div>
+      </div>
+    </footer>
+
     <!-- Hidden fields for configuration -->
     <div style="display: none;">
       <input id="replica" name="replica" />
@@ -644,13 +1014,9 @@
     <script>
       // JavaScript for Tavus CVI interactions
       const logEl = document.getElementById('session-logs');
-      const cidEl = document.getElementById('conversation-id');
-      const curlEl = document.querySelector('.conversation-link');
-      const statusPill = document.querySelector('.status-pill');
-      const startDefaultBtn = document.getElementById('start-default');
-      const startClosetBtn = document.getElementById('start-closet');
       const startDefaultCardBtn = document.getElementById('start-default-card');
       const startClosetCardBtn = document.getElementById('start-closet-card');
+      const startSustainCardBtn = document.getElementById('start-sustain-card');
       const replicaEl = document.getElementById('replica');
       const personaEl = document.getElementById('persona');
 
@@ -664,31 +1030,30 @@
       let altGuardrailsId = '';
       let defaultObjectivesId = '';
       let defaultGuardrailsId = '';
+      let sustainPersonaId = '';
+      let sustainReplicaId = '';
+      let sustainObjectivesId = '';
+      let sustainGuardrailsId = '';
       let currentStylistLabel = 'Style Concierge';
 
       const appendLog = (msg) => {
         const stamp = new Date().toLocaleTimeString();
-        logEl.textContent = `[${stamp}] ${msg}\n` + logEl.textContent;
-      };
-
-      const setStatus = (state) => {
-        statusPill.textContent = state || 'No session';
-        statusPill.style.background = state === 'active' ? '#e7f9ef' : '#f5f5f5';
-        statusPill.style.color = state === 'active' ? '#1c7c3a' : '#4a4a4a';
+        if (logEl) {
+          logEl.textContent = `[${stamp}] ${msg}\n` + logEl.textContent;
+        } else {
+          console.log(`[${stamp}] ${msg}`);
+        }
       };
 
       const handleResponse = (data) => {
         if (!data) return;
-        const { conversation_id, conversation_url, status, conversation_name } = data;
-        cidEl.textContent = conversation_id || '—';
-        curlEl.textContent = conversation_url ? 'Open conversation' : '—';
+        const { conversation_url } = data;
         if (conversation_url) {
-          curlEl.href = conversation_url;
-          curlEl.style.display = 'inline';
+          appendLog('Opening session in a new tab.');
+          window.open(conversation_url, '_blank', 'noopener,noreferrer');
         } else {
-          curlEl.style.display = 'none';
+          appendLog('Conversation created but no URL returned.');
         }
-        setStatus(status);
       };
 
       const api = async (path, options = {}) => {
@@ -730,6 +1095,10 @@
           }
           if (cfg.alt_objectives_id) altObjectivesId = cfg.alt_objectives_id;
           if (cfg.alt_guardrails_id) altGuardrailsId = cfg.alt_guardrails_id;
+          if (cfg.sustain_persona_id) sustainPersonaId = cfg.sustain_persona_id;
+          if (cfg.sustain_replica_id) sustainReplicaId = cfg.sustain_replica_id;
+          if (cfg.sustain_objectives_id) sustainObjectivesId = cfg.sustain_objectives_id;
+          if (cfg.sustain_guardrails_id) sustainGuardrailsId = cfg.sustain_guardrails_id;
           console.log('Set variables:', { altPersonaId, altReplicaId, currentPersonaId: personaEl.value, currentReplicaId: replicaEl.value });
           if (cfg.has_objectives || cfg.has_guardrails) {
             appendLog(`Auto-attach: objectives=${cfg.has_objectives}, guardrails=${cfg.has_guardrails}`);
@@ -796,7 +1165,50 @@
         appendLog(`Stylist set: ${label}`);
       };
 
-      // Event listeners (card buttons only; hero buttons removed)
+      // FAQ accordion
+      const accordionButtons = Array.from(document.querySelectorAll('.accordion button'));
+      accordionButtons.forEach((btn) => {
+        const contentId = btn.getAttribute('aria-controls');
+        const contentEl = document.getElementById(contentId);
+        if (contentEl) contentEl.style.maxHeight = '0px';
+        btn.addEventListener('click', () => {
+          const isOpen = btn.getAttribute('aria-expanded') === 'true';
+          accordionButtons.forEach((other) => {
+            if (other !== btn) {
+              other.setAttribute('aria-expanded', 'false');
+              const otherContent = document.getElementById(other.getAttribute('aria-controls'));
+              if (otherContent) otherContent.style.maxHeight = '0px';
+              other.parentElement?.classList.remove('open');
+            }
+          });
+          btn.setAttribute('aria-expanded', String(!isOpen));
+          btn.parentElement?.classList.toggle('open', !isOpen);
+          if (contentEl) {
+            contentEl.style.maxHeight = !isOpen ? `${contentEl.scrollHeight}px` : '0px';
+          }
+        });
+      });
+
+      // Reveal animations
+      const fadeItems = document.querySelectorAll('.fade-item');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+        fadeItems.forEach((el) => observer.observe(el));
+      } else {
+        fadeItems.forEach((el) => el.classList.add('visible'));
+      }
+
+      // Event listeners (card buttons only)
       if (startDefaultCardBtn) {
         startDefaultCardBtn.addEventListener('click', () => {
           applyStylist('Style Concierge', personaEl.value, replicaEl.value, defaultObjectivesId, defaultGuardrailsId);
@@ -807,6 +1219,18 @@
       if (startClosetCardBtn) {
         startClosetCardBtn.addEventListener('click', () => {
           applyStylist('Closet Refresh Curator', altPersonaId, altReplicaId, altObjectivesId, altGuardrailsId);
+          startConversation();
+        });
+      }
+
+      if (startSustainCardBtn) {
+        startSustainCardBtn.addEventListener('click', () => {
+          if (!sustainPersonaId || !sustainReplicaId) {
+            appendLog('Sustainable Selector IDs are missing. Check env vars and reload.');
+            alert('Sustainable Selector IDs are not configured. Please set TAVUS_SUST_PERSONA_ID and TAVUS_SUST_REPLICA_ID, then reload.');
+            return;
+          }
+          applyStylist('The Sustainable Selector', sustainPersonaId, sustainReplicaId, sustainObjectivesId, sustainGuardrailsId);
           startConversation();
         });
       }

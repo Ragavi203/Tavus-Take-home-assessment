@@ -30,6 +30,10 @@ const TAVUS_ALT_PERSONA_ID = process.env.TAVUS_ALT_PERSONA_ID || '';
 const TAVUS_ALT_REPLICA_ID = process.env.TAVUS_ALT_REPLICA_ID || '';
 const TAVUS_ALT_OBJECTIVES_ID = process.env.TAVUS_ALT_OBJECTIVES_ID || '';
 const TAVUS_ALT_GUARDRAILS_ID = process.env.TAVUS_ALT_GUARDRAILS_ID || '';
+const TAVUS_SUST_PERSONA_ID = process.env.TAVUS_SUST_PERSONA_ID || '';
+const TAVUS_SUST_REPLICA_ID = process.env.TAVUS_SUST_REPLICA_ID || '';
+const TAVUS_SUST_OBJECTIVES_ID = process.env.TAVUS_SUST_OBJECTIVES_ID || '';
+const TAVUS_SUST_GUARDRAILS_ID = process.env.TAVUS_SUST_GUARDRAILS_ID || '';
 
 const sendJson = (res, status, payload) => {
   res.writeHead(status, {
@@ -152,6 +156,10 @@ const server = http.createServer(async (req, res) => {
       alt_replica_id: TAVUS_ALT_REPLICA_ID,
       alt_objectives_id: TAVUS_ALT_OBJECTIVES_ID,
       alt_guardrails_id: TAVUS_ALT_GUARDRAILS_ID,
+      sustain_persona_id: TAVUS_SUST_PERSONA_ID,
+      sustain_replica_id: TAVUS_SUST_REPLICA_ID,
+      sustain_objectives_id: TAVUS_SUST_OBJECTIVES_ID,
+      sustain_guardrails_id: TAVUS_SUST_GUARDRAILS_ID,
     });
     return;
   }
