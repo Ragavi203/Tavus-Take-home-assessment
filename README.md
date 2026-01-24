@@ -1,18 +1,19 @@
 # Styling Concierge – Tavus CVI Demo (Report)
 
-This demo shows a high-touch styling experience powered by Tavus Conversational Video Interface (CVI). It includes a luxury-inspired, two-persona UI and a minimal Node proxy that keeps the Tavus API key server-side.
+This demo shows a high-touch styling experience powered by Tavus Conversational Video Interface (CVI). It includes a luxury-inspired, three-persona UI and a minimal Node proxy that keeps the Tavus API key server-side.
 
 ## Why this project
 - Demonstrates real-time, human-in-the-loop styling with Tavus CVI.
 - Protects secrets with a tiny proxy (no external deps).
-- Highlights two distinct personas:
+- Highlights three distinct personas:
   - **Style Concierge**: Makeup + look pairing, boldness tuning, recap.
   - **Closet Refresh Curator**: Reuse-first outfits, minimal add-ons, recap + care tips.
+  - **The Sustainable Selector**: Eco-forward looks using rewears, curated thrift, rentals, and low-impact fabrics.
 - Persona setup + objectives/guardrails are auto-attached via env, proving safe, policy-driven sessions.
 
 ## Architecture (high level)
 - **Frontend (`index.html`)**: Static, luxury-styled UI; users pick a stylist and start a session; calls the proxy, never exposes the API key.
-- **Proxy (`server.js`)**: Minimal Node HTTP server (no deps) that injects `x-api-key` and forwards to Tavus (`https://tavusapi.com/v2`). Binds to `0.0.0.0` for hosting. Auto-attaches objectives/guardrails from env (default + alt personas).
+- **Proxy (`server.js`)**: Minimal Node HTTP server (no deps) that injects `x-api-key` and forwards to Tavus (`https://tavusapi.com/v2`). Binds to `0.0.0.0` for hosting. Auto-attaches objectives/guardrails from env (default + alt + sustain personas).
 - **Tavus CVI**: Creates conversations and returns `conversation_url` for the live session.
 
 Data flow:
@@ -22,7 +23,7 @@ UI (stylist selection) → proxy (/api/conversations) → Tavus CVI → returns 
 
 ## Key decisions
 - **No frontend secrets**: API key stays server-side; proxy handles all Tavus calls.
-- **Persona flexibility**: Default + alt personas/replicas/objectives/guardrails are configurable via env; UI switches IDs per stylist.
+- **Persona flexibility**: Default + alt + sustain personas/replicas/objectives/guardrails are configurable via env; UI switches IDs per stylist.
 - **Zero external deps**: Plain Node `http` + `fetch`; fast start, minimal attack surface.
 - **Luxury UX**: Serif headings (Playfair/Cormorant), Inter body, muted palette, rounded cards, minimal chrome.
 
@@ -41,6 +42,10 @@ TAVUS_ALT_PERSONA_ID=pc6420314586
 TAVUS_ALT_REPLICA_ID=rc2146c13e81
 TAVUS_ALT_OBJECTIVES_ID=o832aa68c913c
 TAVUS_ALT_GUARDRAILS_ID=...
+TAVUS_SUST_PERSONA_ID=...
+TAVUS_SUST_REPLICA_ID=...
+TAVUS_SUST_OBJECTIVES_ID=...
+TAVUS_SUST_GUARDRAILS_ID=...
 ```
 3) Run: `node server.js` and open `http://localhost:4173`.
 4) Pick a stylist card → Start; the proxy attaches the correct persona/replica/objectives/guardrails.
